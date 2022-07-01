@@ -20,6 +20,8 @@ services:
     container_name: web
     volumes:
       - .:/code
+    command:
+      - /deploy.sh
     ports:
       - "8000:8000"
     env_file:

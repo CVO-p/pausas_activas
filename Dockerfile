@@ -7,4 +7,5 @@ RUN pip install -r requirements.txt
 
 COPY . /code/
 
-CMD ["sh","./deploy.sh"]
+COPY ./deploy.sh /deploy.sh
+RUN chmod +x /deploy.sh
