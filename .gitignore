@@ -11,3 +11,5 @@ templates/base.html
 entorno-pausas/Scripts/activate
 *.txt
 entorno-pausas/Lib/site-packages/setuptools-58.1.0.dist-info/LICENSE
+.envs
+.envs/*

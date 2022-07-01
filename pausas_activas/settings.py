@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'core.apps.CoreConfig',
 
+    'minio_storage',
     'nested_admin',
     'colorfield',
     'django_cleanup.apps.CleanupConfig',
@@ -159,3 +160,24 @@ LOGOUT_REDIRECT_URL = '/'
 # only if django version >= 3.0
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 SILENCED_SYSTEM_CHECKS = ['security.W019']
+
+if DEBUG is False:
+    MINIO_HTTPS = os.getenv('MINIO_HTTPS', False)
+    MINIO_HOST = os.getenv('MINIO_HOST', 'minio')
+    MINIO_URL = os.getenv('MINIO_URL', '')
+    MINIO_PORT = os.getenv('MINIO_PORT', '9000')
+    MEDIA_BUCKET = os.getenv('MEDIA_BUCKET', 'api-media-data')
+    STATIC_BUCKET = os.getenv('STATIC_BUCKET', 'api-static-data')
+
+    DEFAULT_FILE_STORAGE = "minio_storage.storage.MinioMediaStorage"
+    STATICFILES_STORAGE = "minio_storage.storage.MinioStaticStorage"
+    MINIO_STORAGE_ENDPOINT = f"{MINIO_HOST}:{MINIO_PORT}"
+    MINIO_STORAGE_ACCESS_KEY = os.getenv('MINIO_ACCESS_KEY', '')
+    MINIO_STORAGE_SECRET_KEY = os.getenv('MINIO_SECRET_KEY', '')
+    MINIO_STORAGE_USE_HTTPS = MINIO_HTTPS
+    MINIO_STORAGE_MEDIA_BUCKET_NAME = MEDIA_BUCKET
+    MINIO_STORAGE_AUTO_CREATE_MEDIA_BUCKET = True
+    MINIO_STORAGE_STATIC_BUCKET_NAME = STATIC_BUCKET
+    MINIO_STORAGE_AUTO_CREATE_STATIC_BUCKET = True
+
+    DATA_UPLOAD_MAX_NUMBER_FIELDS = 10000

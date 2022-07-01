@@ -1,0 +1,28 @@
+version: "3.9"
+
+volumes:
+  local_media_data: { }
+
+services:
+  minio:
+    container_name: minio
+    image: minio/minio:RELEASE.2021-01-08T21-18-21Z
+    ports:
+      - "9090:9000"
+    env_file:
+      - .envs/.minio
+    volumes:
+      - local_media_data:/data
+
+  web:
+    build: .
+    container_name: web
+    command: /start-api
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    env_file:
+      - .envs/.web
+    depends_on:
+      - minio
