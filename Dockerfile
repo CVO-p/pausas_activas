@@ -5,7 +5,4 @@ WORKDIR /code
 COPY requirements.txt /code/
 RUN pip install -r requirements.txt
 
-COPY ./start-api /start-api
-RUN chmod +x /start-api
-
 COPY . /code/

@@ -17,7 +17,7 @@ services:
   web:
     build: .
     container_name: web
-    command: /start-api
+    command: python manage.py collectstatic --no-input && python manage.py migrate && gunicorn pausas_activas.wsgi:application --bind 0.0.0.0:8000
     volumes:
       - .:/code
     ports:
