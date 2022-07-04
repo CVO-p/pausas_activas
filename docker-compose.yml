@@ -3,6 +3,11 @@ version: "3.7"
 volumes:
   local_media_data: { }
 
+networks:
+  default:
+    external:
+      name: osv-proxy_osv_network
+
 services:
   minio:
     container_name: minio
