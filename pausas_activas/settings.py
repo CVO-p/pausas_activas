@@ -27,7 +27,7 @@ DEBUG = os.getenv('DEBUG', True)
 
 ENVIRONMENT = os.getenv('ENVIRONMENT', 'local')
 
-ALLOWED_HOSTS = ['pausas.diegoasencio.co', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['pausas.diegoasencio.co', 'pausasactivas.svesalud.com', '127.0.0.1', 'localhost']
 
 # Application definition
 
