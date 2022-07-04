@@ -18,7 +18,6 @@ from django.contrib.auth.decorators import login_required
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from django.views.generic import TemplateView
 
 from core.views import IndexTemplateView, IndexDetailView
 
@@ -28,5 +27,8 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     path('', login_required(IndexTemplateView.as_view()), name='home'),
     path('pausa-activa/<slug:slug>/', login_required(IndexDetailView.as_view()), name='home_detail'),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
 
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
